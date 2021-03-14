@@ -4,29 +4,35 @@ int	check_max(int *my_tab, int array_size)
 {
 	int ref;
 	int i;
+	int j;
+	int a;
 
-	ref = 0;
+	ref = my_tab[a];
 	i = 0;
+	a = 0;
 	while (i < array_size)
 	{
-		if(my_tab[ref] < my_tab[i])
+		if(ref < my_tab[i])
 		{
-			ref = i;
+			j = i;
 		}
 		i++;
+		/*
+		if(array_size == 1)
+		{
+			j = i;
+		}
+		*/
 	}
-	return ref;
+	return j;
 }
 
 void	remove_int(int *my_tab, int position, int array_size)
 {
-	int i;
-
-	i = position;
-	while (i < array_size)
+	while (position < array_size)
 	{
-		my_tab[i] = my_tab[i + 1];
-		i++;
+		my_tab[position] = my_tab[position + 1];
+		position++;
 	}
 }
 
@@ -41,7 +47,10 @@ void	ft_sort_int_tab(int *tab, int size)
 	while (size >= 0)
 	{
 		swap[size] = tab[check_max(tab, size)];
-		remove_int(tab, check_max(tab, size), size);
+		if (size != mem_size) 
+		{
+			remove_int(tab, check_max(tab, size), size);
+		}
 		size--;
 	}
 	while (i < mem_size)
