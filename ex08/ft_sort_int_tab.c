@@ -1,61 +1,40 @@
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_sort_int_tab.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rcollas <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/15 13:38:25 by rcollas           #+#    #+#             */
+/*   Updated: 2021/03/15 13:51:14 by rcollas          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int	check_max(int *my_tab, int array_size)
-{
-	int ref;
-	int i;
-	int j;
-	int a;
-
-	ref = my_tab[a];
-	i = 0;
-	a = 0;
-	while (i < array_size)
-	{
-		if(ref < my_tab[i])
-		{
-			j = i;
-		}
-		i++;
-		/*
-		if(array_size == 1)
-		{
-			j = i;
-		}
-		*/
-	}
-	return j;
-}
-
-void	remove_int(int *my_tab, int position, int array_size)
-{
-	while (position < array_size)
-	{
-		my_tab[position] = my_tab[position + 1];
-		position++;
-	}
-}
+#include <unistd.h>
 
 void	ft_sort_int_tab(int *tab, int size)
 {
-	int swap[size];
+	int swap;
 	int i;
-	int mem_size;
+	int j;
 
 	i = 0;
-	mem_size = size;
-	while (size >= 0)
+	j = 0;
+	while (size > 0)
 	{
-		swap[size] = tab[check_max(tab, size)];
-		if (size != mem_size) 
+		swap = tab[0];
+		while (i < size)
 		{
-			remove_int(tab, check_max(tab, size), size);
+			if (tab[i] >= swap)
+			{
+				swap = tab[i];
+				j = i;
+			}
+			i++;
 		}
+		tab[j] = tab[size - 1];
+		tab[size - 1] = swap;
+		i = 0;
 		size--;
-	}
-	while (i < mem_size)
-	{
-		tab[i] = swap[i];
-		i++;
 	}
 }
